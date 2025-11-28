@@ -1,12 +1,5 @@
 # Sistema de Votação Distribuído (Trabalho - Computação Distribuída)
 
-## Arquivos no ZIP
-- `server.c` - servidor da eleição (pthread + sockets)
-- `client.c` - cliente interativo
-- `Makefile` - para compilar
-- `eleicao.log` - (será criado/atualizado pelo servidor)
-- `resultado_final.txt` - (será gerado quando ADMIN CLOSE for executado)
-
 ## Compilação
 Requer gcc e pthreads.
 ```
