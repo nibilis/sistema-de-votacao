@@ -66,10 +66,11 @@ int main(int argc, char **argv) {
         if (!fgets(line, sizeof(line), stdin)) break;
         size_t l = strlen(line);
         if (l==0) continue;
-        if (line[l-1] != '\\n') {
+        if (line[l-1] != '\n') {
             // ensure newline
-            if (l+1 < sizeof(line)) { line[l]='\\n'; line[l+1]=0; }
+            if (l+1 < sizeof(line)) { line[l]='\n'; line[l+1]=0; }
         }
+        printf("Sending %s\n", line);
         if (send(sock, line, strlen(line), 0) < 0) {
             perror("send");
             break;

@@ -220,8 +220,8 @@ void *client_thread(void *arg) {
             voters[vidx].voted = 1;
             voters[vidx].choice = found;
             counts[found]++;
-            log_event("VOTE %s %s", voter_id, options[found]);
             pthread_mutex_unlock(&lock);
+            log_event("VOTE %s %s", voter_id, options[found]);
             send_line(sock, "OK VOTED %s", options[found]);
             continue;
         }
@@ -249,11 +249,13 @@ void *client_thread(void *arg) {
                     }
                     fclose(f);
                 }
+                pthread_mutex_unlock(&lock);
                 log_event("ADMIN closed election");
+                pthread_mutex_lock(&lock);
             }
             // respond with final scoreboard
-            send_score(sock, 1);
             pthread_mutex_unlock(&lock);
+            send_score(sock, 1);
             continue;
         }
 
